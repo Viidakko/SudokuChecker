@@ -15,15 +15,48 @@ SudokuVerifier v = new SudokuVerifier();
 	@Test
 	public void testCorrectString() {
 		int a = v.verify(c);
-		assertEquals("correct string", a, 0);
+		assertEquals("correct string", 0, a);
 	}
 
 	@Test
 	public void testIncorrectString() {
 		int a = v.verify(i);
-		assertEquals("incorrect string", a, -2);
-		
+		assertEquals("Did not pick-up repeating character from subgrid", -2, a);
 	}
 	
+	@Test
+	public void testNegativeNumbers() {
+		String negativeNumber = "-417369825632158947958724316825437169791586432346912758289643571573291684164875293";
+		int a = v.verify(negativeNumber);
+		assertEquals("Did not pickup negative number", -1, a);
+	}
 	
+	@Test
+	public void testRepeatingNumbersInRow() {
+		String incorrectRows = "417369824632158957958724316825437169791586432346912758289643571573291684164875293";
+		int a = v.verify(incorrectRows);
+		assertEquals("Did not find incorrect row", -3, a);
+	}
+	@Test
+	public void testRepeatingNumbersInColumn() {
+		String incorrectRows = ""
+				+ "417369825"
+				+ "632158947"
+				+ "958724316"
+				+ "825437169"
+				+ "791586432"
+				+ "346912758"
+				+ "289643571"
+				+ "573291684"
+				+ "614875293";
+		int a = v.verify(incorrectRows);
+		assertEquals("Did not find incorrect row", -4, a);
+	}
+	
+	@Test
+	public void testNotANumber() {
+		String notANumber = "hie369825632158947958724316825437169791586432346912758289643571573291684164875293";
+		int a = v.verify(notANumber);
+		assertEquals("Did not pick up characters that are not numbers", 1, a);
+	}
 }
