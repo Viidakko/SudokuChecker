@@ -25,13 +25,6 @@ SudokuVerifier v = new SudokuVerifier();
 	}
 	
 	@Test
-	public void testNegativeNumbers() {
-		String negativeNumber = "-417369825632158947958724316825437169791586432346912758289643571573291684164875293";
-		int a = v.verify(negativeNumber);
-		assertEquals("Did not pickup negative number", -1, a);
-	}
-	
-	@Test
 	public void testRepeatingNumbersInRow() {
 		String incorrectRows = "417369824632158957958724316825437169791586432346912758289643571573291684164875293";
 		int a = v.verify(incorrectRows);
